@@ -1194,9 +1194,9 @@ class _YoutubePlayerState extends State<YoutubePlayer>
       SystemChrome.setPreferredOrientations(
         const [
           DeviceOrientation.portraitUp,
-          DeviceOrientation.portraitDown,
-          DeviceOrientation.landscapeLeft,
-          DeviceOrientation.landscapeRight,
+          // DeviceOrientation.portraitDown,
+          // DeviceOrientation.landscapeLeft,
+          // DeviceOrientation.landscapeRight,
         ],
       );
       _triggeredByUser = false;
