@@ -1190,10 +1190,10 @@ class _YoutubePlayerState extends State<YoutubePlayer>
 
     SystemChrome.setEnabledSystemUIOverlays([]);
     if (triggeredByUser) {
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
-      ]);
+      // SystemChrome.setPreferredOrientations([
+      //   DeviceOrientation.landscapeLeft,
+      //   DeviceOrientation.landscapeRight,
+      // ]);
       _triggeredByUser = true;
     }
 
@@ -1216,6 +1216,11 @@ class _YoutubePlayerState extends State<YoutubePlayer>
     return AnimatedBuilder(
       animation: animation,
       builder: (BuildContext context, Widget child) {
+        SystemChrome.setPreferredOrientations([
+          DeviceOrientation.landscapeLeft,
+          DeviceOrientation.landscapeRight,
+        ]);
+
         return Scaffold(
           body: _buildVideo(MediaQuery.of(context).size.height,
               MediaQuery.of(context).size.width, true),
