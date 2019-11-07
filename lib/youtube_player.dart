@@ -812,6 +812,11 @@ class YoutubePlayer extends StatefulWidget {
   /// Default = false
   final bool loop;
 
+  /// If set to array, when video exist fullscreen recovery to array orientations.
+  /// 
+  /// Default = [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown,DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight,]
+  final List<DeviceOrientation> currentDeviceOrientations;
+
   YoutubePlayer({
     @required this.source,
     @required this.context,
@@ -836,6 +841,12 @@ class YoutubePlayer extends StatefulWidget {
     this.hideShareButton = false,
     this.reactToOrientationChange = true,
     this.loop = false,
+    this.currentDeviceOrientations = const [
+          DeviceOrientation.portraitUp,
+          DeviceOrientation.portraitDown,
+          DeviceOrientation.landscapeLeft,
+          DeviceOrientation.landscapeRight,
+        ]
   }) : assert(
             (width ?? MediaQuery.of(context).size.width) <=
                 MediaQuery.of(context).size.width,
@@ -873,6 +884,7 @@ class _YoutubePlayerState extends State<YoutubePlayer>
   bool _isFullScreen = false;
   bool _triggeredByUser = false;
   bool _videoEndedCalled = false;
+  List<DeviceOrientation> get _currentDeviceOrientations => this.widget.currentDeviceOrientations;
 
   @override
   void initState() {
@@ -1191,14 +1203,7 @@ class _YoutubePlayerState extends State<YoutubePlayer>
 
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     if (triggeredByUser) {
-      SystemChrome.setPreferredOrientations(
-        const [
-          DeviceOrientation.portraitUp,
-          // DeviceOrientation.portraitDown,
-          // DeviceOrientation.landscapeLeft,
-          // DeviceOrientation.landscapeRight,
-        ],
-      );
+      SystemChrome.setPreferredOrientations(this._currentDeviceOrientations);
       _triggeredByUser = false;
     }
   }
